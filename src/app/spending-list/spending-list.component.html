@@ -1,0 +1,31 @@
+<div class="row">
+  <div class="col-sm-12">
+    <table class="table table-hover table-striped table-bordered datatable" role="grid">
+      <thead>
+      <tr role="row">
+        <th *ngFor="let column of header" scope="col" class="sorting">{{column}} </th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let spending of spendingList | async">
+        <th scope="row">{{spending.spendingDate}}</th>
+        <td>{{spending.amount}}</td>
+        <td>{{spending.categoryId}}</td>
+        <td>{{spending.accountId}}</td>
+        <td>{{spending.note}}</td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+</div>
+
+<!--<div class="d-flex justify-content-between p-2">-->
+<!--  <ngx-pagination [collectionSize]="(spendingList | async).length" [(page)]="page" [pageSize]="pageSize" (pageChange)="refreshCountries()">-->
+<!--  </ngx-pagination>-->
+
+<!--  <select class="custom-select" style="width: auto" [(ngModel)]="pageSize" (change)="refreshCountries()">-->
+<!--    <option [value]="2">2 items per page</option>-->
+<!--    <option [value]="4">4 items per page</option>-->
+<!--    <option [value]="6">6 items per page</option>-->
+<!--  </select>-->
+<!--</div>-->
