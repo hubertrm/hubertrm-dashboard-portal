@@ -128,6 +128,10 @@
           }
         }
       }
-    }},
-  "defaultProject": "spendings"
+    }
+  },
+  "defaultProject": "spendings",
+  "cli": {
+    "analytics": "32b1768e-b2c4-4124-94ab-26c791ddb140"
+  }
 }

@@ -1,8 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import {Observable} from "rxjs";
-import {Spending} from "./model/spending.interface";
-import {SpendingListService} from "./service/spending-list.service";
-import {map} from "rxjs/operators";
+import {Component, OnInit, QueryList, ViewChildren} from '@angular/core';
+import {Observable} from 'rxjs';
+import {Spending} from './model/spending.interface';
+import {SpendingListService} from './service/spending-list.service';
+import {SortableHeaderDirective, SortEvent} from './sortable-header.directive';
 
 @Component({
   selector: 'app-spending-list',
@@ -11,22 +11,30 @@ import {map} from "rxjs/operators";
 })
 export class SpendingListComponent implements OnInit {
 
-  spendingList: Observable<Array<Spending>>;
-  header = ['Date', 'Montant', 'Categorie', 'Compte', 'Commentaire'];
+  spendingList$: Observable<Array<Spending>>;
+  total$: Observable<number>;
+  header = ['spendingDate', 'amount', 'categoryId', 'accountId', 'note'];
 
-  page = 1;
-  pageSize = 4;
+  @ViewChildren(SortableHeaderDirective) headers: QueryList<SortableHeaderDirective>;
 
-  constructor(private spendingListService: SpendingListService) { }
-
-  ngOnInit() {
-    this.spendingList = this.spendingListService.getAllSpendings();
+  constructor(public spendingListService: SpendingListService) {
+    this.spendingList$ = spendingListService.spendingList$;
+    this.total$ = spendingListService.total$;
   }
 
-  refreshCountries(): Observable<Array<any>> {
-    return this.spendingList.pipe(
-      map((spending, i) => ({id: i + 1, ...spending})),
-      map((spending) => spending.slice((this.page - 1) * this.pageSize, (this.page - 1) * this.pageSize + this.pageSize))
-    );
+  ngOnInit() {
+  }
+
+  onSort({column, direction}: SortEvent) {
+
+    // resetting other headers
+    this.headers.forEach(header => {
+      if (header.sortable !== column) {
+        header.direction = '';
+      }
+    });
+
+    this.spendingListService.sortColumn = column;
+    this.spendingListService.sortDirection = direction;
   }
 }
