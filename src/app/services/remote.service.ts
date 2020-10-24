@@ -1,9 +1,9 @@
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { Observable } from 'rxjs';
-import { Spending } from '../spending-list/model/spending.interface';
-import {Category} from '../spending-list/model/category.interface';
-import {Account} from '../spending-list/model/account.interface';
+import { Spending } from '../components/spending-table/model/spending.interface';
+import { Category } from '../components/spending-table/model/category.interface';
+import { Account } from '../components/spending-table/model/account.interface';
 
 @Injectable({
   providedIn: 'root'

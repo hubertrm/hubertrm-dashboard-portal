@@ -1,6 +1,6 @@
 export interface Spending {
   id: number;
-  spendingDate: string;
+  spendingDate: Date;
   amount: number;
   categoryId: number;
   accountId: number;

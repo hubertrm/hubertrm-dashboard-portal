@@ -1,0 +1,107 @@
+<p>spending-table works!</p>
+<div class="card">
+  <p-table #dt styleClass="p-datatable-striped" dataKey="id"
+           [columns]="columns" [value]="spendingList" [loading]="loading"
+           [paginator]="paginator" [rows]="rows" [showCurrentPageReport]="showCurrentPageReport"
+           currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
+           [rowsPerPageOptions]="rowsPerPageOption"
+           [filterDelay]="0" [globalFilterFields]="globalFilterFields"
+           [(selection)]="selectedSpendingList">
+    <ng-template pTemplate="caption">
+      <div class="table-header">
+        <span class="p-input-icon-left">
+            <i class="pi pi-search"></i>
+            <input type="text"
+                   (input)="dt.filterGlobal($event.target.value, 'contains')"
+                   placeholder="Global Search" class="p-inputtext" />
+        </span>
+      </div>
+    </ng-template>
+    <ng-template pTemplate="header" let-columns>
+      <tr>
+        <th></th>
+        <th *ngFor="let col of columns" [pSortableColumn]="col.field">
+          {{col.header}} <p-sortIcon [field]="col.field"></p-sortIcon>
+        </th>
+      </tr>
+      <tr>
+        <th style="width: 3rem">
+          <p-tableHeaderCheckbox></p-tableHeaderCheckbox>
+        </th>
+        <th>
+          <input type="number" (input)="dt.filter($event.target.value, 'id', 'equals')"
+                 placeholder="Search by ID" class="p-column-filter p-inputtext">
+        </th>
+        <th>
+          <div class="p-field">
+          <p-calendar (onSelect)="onDateSelect($event)" (onClearClick)="dt.filter('', 'date', 'equals')"
+            [showButtonBar]="true" [readonlyInput]="true" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030"
+            inputId="range" selectionMode="range" styleClass="p-column-filter" placeholder="Date" dateFormat="dd-mm-yy"></p-calendar>
+          </div>
+        </th>
+        <th>
+          <input type="number" (input)="dt.filter($event.target.value, 'amount', 'equals')"
+                 placeholder="Search by amount" class="p-column-filter p-inputtext">
+        </th>
+        <th>
+          <p-multiSelect [options]="categoryList" placeholder="All" (onChange)="onCategoryChange($event)"
+                         styleClass="p-column-filter" optionLabel="name">
+            <ng-template let-option pTemplate="item">
+              <div class="p-multiselect-representative-option">
+                <span class="p-ml-1">{{option.label}}</span>
+              </div>
+            </ng-template>
+          </p-multiSelect>
+        </th>
+        <th>
+          <p-multiSelect [options]="accountList" placeholder="All" (onChange)="onAccountChange($event)"
+                         styleClass="p-column-filter" optionLabel="name">
+            <ng-template let-option pTemplate="item">
+              <div class="p-multiselect-representative-option">
+                <span class="p-ml-1">{{option.label}}</span>
+              </div>
+            </ng-template>
+          </p-multiSelect>
+        </th>
+        <th>
+          <input type="text" (input)="onNoteChange($event)"
+                 placeholder="Search by Note" class="p-column-filter p-inputtext">
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-spendingList let-columns="columns">
+      <tr>
+        <td>
+          <p-tableCheckbox [value]="spendingList"></p-tableCheckbox>
+        </td>
+<!--        <td *ngFor="let col of columns">-->
+<!--          {{spendingList[col.field]}}-->
+<!--        </td>-->
+        <td>
+          {{spendingList[columns[0].field]}}
+        </td>
+        <td>
+          {{spendingList[columns[1].field] | date: 'longDate' }}
+        </td>
+        <td>
+          {{spendingList[columns[2].field]}}
+        </td>
+        <td>
+          {{spendingList[columns[3].field]}}
+        </td>
+        <td>
+          {{spendingList[columns[4].field]}}
+        </td>
+        <td>
+          {{spendingList[columns[5].field]}}
+        </td>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="paginatorleft">
+      <p-button type="button" icon="pi pi-plus" styleClass="p-button-text"></p-button>
+    </ng-template>
+    <ng-template pTemplate="paginatorright">
+      <p-button type="button" icon="pi pi-cloud" styleClass="p-button-text"></p-button>
+    </ng-template>
+  </p-table>
+</div>

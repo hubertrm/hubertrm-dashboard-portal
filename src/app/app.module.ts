@@ -1,32 +1,36 @@
 import { BrowserModule } from '@angular/platform-browser';
+import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { NgModule } from '@angular/core';
 
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
-import { SpendingListComponent } from './spending-list/spending-list.component';
-import {HttpClientModule} from '@angular/common/http';
-import {FormsModule} from '@angular/forms';
-import {NgxPaginationModule} from 'ngx-pagination';
-import {SortableHeaderDirective} from './spending-list/sortable-header.directive';
+import { HttpClientModule } from '@angular/common/http';
+import { FormsModule} from '@angular/forms';
+import { NgxPaginationModule } from 'ngx-pagination';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
-import {CategoryPipe} from './spending-list/pipe/category.pipe';
-import { AccountPipe } from './spending-list/pipe/account.pipe';
+import { SpendingTableComponent } from './components/spending-table/spending-table.component';
+import {TableModule} from 'primeng/table';
+import {CalendarModule} from 'primeng/calendar';
+import {ButtonModule} from 'primeng/button';
+import {MultiSelectModule} from 'primeng/multiselect';
 
 @NgModule({
   declarations: [
     AppComponent,
-    SpendingListComponent,
-    SortableHeaderDirective,
-    CategoryPipe,
-    AccountPipe,
+    SpendingTableComponent,
   ],
   imports: [
     AppRoutingModule,
     BrowserModule,
+    BrowserAnimationsModule,
     FormsModule,
     HttpClientModule,
     NgxPaginationModule,
     NgbModule,
+    TableModule,
+    ButtonModule,
+    MultiSelectModule,
+    CalendarModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

@@ -1,11 +1,11 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
-import {SpendingListComponent} from './spending-list/spending-list.component';
+import {SpendingTableComponent} from './components/spending-table/spending-table.component';
 
 
 const routes: Routes = [
   {
-    path: '', component: SpendingListComponent
+    path: '', component: SpendingTableComponent
   }
 ];
 
