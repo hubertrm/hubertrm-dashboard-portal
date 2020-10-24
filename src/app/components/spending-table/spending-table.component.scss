@@ -1,3 +1,11 @@
 .card {
   background-color: #121212;
 }
+
+::ng-deep.datepicker {
+  width: 330px !important;
+}
+
+::ng-deep.p-datatable-scrollable-footer, ::ng-deep.p-datatable-scrollable-header {
+  overflow: visible !important;
+}

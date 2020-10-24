@@ -6,7 +6,8 @@
            currentPageReportTemplate="Showing {first} to {last} of {totalRecords} entries"
            [rowsPerPageOptions]="rowsPerPageOption"
            [filterDelay]="0" [globalFilterFields]="globalFilterFields"
-           [(selection)]="selectedSpendingList">
+           [(selection)]="selectedSpendingList"
+           [scrollable]="true" scrollHeight="calc(100vh - 149px)">
     <ng-template pTemplate="caption">
       <div class="table-header">
         <span class="p-input-icon-left">
@@ -32,11 +33,12 @@
           <input type="number" (input)="dt.filter($event.target.value, 'id', 'equals')"
                  placeholder="Search by ID" class="p-column-filter p-inputtext">
         </th>
-        <th>
+        <th style="width: 3rem">
           <div class="p-field">
           <p-calendar (onSelect)="onDateSelect($event)" (onClearClick)="dt.filter('', 'date', 'equals')"
             [showButtonBar]="true" [readonlyInput]="true" [monthNavigator]="true" [yearNavigator]="true" yearRange="2000:2030"
-            inputId="range" selectionMode="range" styleClass="p-column-filter" placeholder="Date" dateFormat="dd-mm-yy"></p-calendar>
+            inputId="range" selectionMode="range" styleClass="p-column-filter" placeholder="Date" dateFormat="dd-mm-yy"
+            panelStyleClass="datepicker"></p-calendar>
           </div>
         </th>
         <th>
