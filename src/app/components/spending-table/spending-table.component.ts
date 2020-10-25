@@ -50,23 +50,35 @@ export class SpendingTableComponent implements OnInit {
     ];
   }
 
-  onDateSelect(value: Date) {
-    console.log(value.toISOString());
-    console.log(value.toLocaleDateString());
-    console.log(value.toLocaleTimeString());
-    console.log(value.toLocaleString());
-    this.table.filter(value.toLocaleDateString(), 'spendingDate', 'equals')
+  onDateSelect(value: Date): void {
+    this.table.filter(this.formatDate(value), 'spendingDate', 'contains')
   }
 
-  onCategoryChange(event) {
+  formatDate(date) {
+    let month = (date.getMonth() + 1).toString();
+    let day = date.getDate().toString();
+
+    if (month < 10) {
+      month = '0' + month;
+    }
+
+    if (day < 10) {
+      day = '0' + day;
+    }
+
+    console.log(date.getFullYear() + '-' + month + '-' + day);
+    return date.getFullYear() + '-' + month + '-' + day;
+  }
+
+  onCategoryChange(event): void {
     this.table.filter(event.value.map(category => category.id), 'categoryId', 'in');
   }
 
-  onAccountChange(event) {
+  onAccountChange(event): void {
     this.table.filter(event.value.map(account => account.id), 'accountId', 'in');
   }
 
-  onNoteChange(event) {
+  onNoteChange(event): void {
     this.table.filter(event.target.value, 'note', 'contains');
   }
 }
